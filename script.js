@@ -1,29 +1,46 @@
-class Estudiante {
-    constructor (nombre, apellido, materia, nota){
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.materia = materia;
-        this.nota = nota;
-    }
-}
+const box = document.getElementById("caja");
 
-const estudiante1 = new Estudiante ("Fernando", "Calligo", "Programación", 10);
-const estudiante2 = new Estudiante ("Pepe", "Lopez", "Matematicas", 6);
-const estudiante3 = new Estudiante ("Juanito", "Perez", "Programación", 7);
-const estudiante4 = new Estudiante ("Ana", "Gomez", "Programación", 4);
-const estudiante5 = new Estudiante ("Julian", "Alvarez", "Historia", 3);
+const up = document.getElementById("arriba");
+const left = document.getElementById("izquierda");
+const right = document.getElementById("derecha");
+const down = document.getElementById("abajo");
+const reset = document.getElementById("reset")
 
-const estudiantes = [estudiante1, estudiante2, estudiante3, estudiante4, estudiante5];
+let arribacont = -50;
+let izquierdacont = -50;
+let derechacont = -50;
+let abajocont = -50;
 
-let opcion = parseInt(prompt("Ingrese la accion deseada: 1 - Ver aprobados | 2 - Ver desaprobados"));
 
-switch (opcion) {
-    case 1:
-        const aprobados = estudiantes.slice(0, 3);
-        console.log(aprobados);
-        break;
-    case 2:
-        const desaprobados = estudiantes.slice (3, 5);
-        console.log(desaprobados);
-        break;
-}
+up.addEventListener("click", () => {
+    box.style.top = `${arribacont}px`
+    arribacont = arribacont - 50;
+})
+
+left.addEventListener("click", () => {
+    box.style.left = `${izquierdacont}px`
+    izquierdacont = izquierdacont - 50;
+})
+
+right.addEventListener("click", () => {
+    box.style.right = `${derechacont}px`
+    derechacont = derechacont - 50;
+})
+
+down.addEventListener("click", () => {
+    box.style.bottom = `${abajocont}px`
+    abajocont = abajocont - 50;
+})
+
+reset.addEventListener("click", () => {
+    box.style.top = "0px";
+    box.style.right = "0px";
+    box.style.left = "0px";
+    box.style.bottom = "0px";
+
+    arribacont = -50;
+    derechacont = -50;
+    izquierdacont = -50;
+    abajocont = -50;
+
+})
