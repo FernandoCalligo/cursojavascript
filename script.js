@@ -1,46 +1,65 @@
-const box = document.getElementById("caja");
+class Producto {
+    constructor(nombre, stock, precio) {
+        this.nombre = nombre;
+        this.stock = stock;
+        this.precio = precio;
+    }
+}
 
-const up = document.getElementById("arriba");
-const left = document.getElementById("izquierda");
-const right = document.getElementById("derecha");
-const down = document.getElementById("abajo");
-const reset = document.getElementById("reset")
+const producto1 = new Producto ("TV Led 30 pulgadas", 20, 40000 );
+const producto2 = new Producto ("Horno electrico", null, 14000 );
+const producto3 = new Producto ("Heladera", 10, 120000 );
+const producto4 = new Producto ("Batidora", null, 8000 );
 
-let arribacont = -50;
-let izquierdacont = -50;
-let derechacont = -50;
-let abajocont = -50;
+const productos = [producto1, producto2, producto3, producto4]
+
+const contdiv = document.getElementById("conteiner");
+const btnstock = document.getElementById("btnstock");
+const btnborrar = document.getElementById("btnborrar");
 
 
-up.addEventListener("click", () => {
-    box.style.top = `${arribacont}px`
-    arribacont = arribacont - 50;
+productos.forEach(productos => {
+    contdiv.innerHTML += `
+    <div class="cardinfo">
+        <h1>${productos.nombre}</h1>
+        <span>Stock disponible: ${(productos?.stock ?? "No hay stock disponibles") }</span>
+        <p> Precio: $${productos.precio}</p>
+    </div>
+    `
 })
 
-left.addEventListener("click", () => {
-    box.style.left = `${izquierdacont}px`
-    izquierdacont = izquierdacont - 50;
+btnstock.addEventListener("click", () => {
+    producto1.stock = null;
+    producto2.stock = 50;
+    producto3.stock = null;
+    producto4.stock = 45;
+    contdiv.innerHTML = ``
+
+    productos.forEach(productos => {
+            contdiv.innerHTML += `
+            <div class="cardinfo">
+                <h1>${productos.nombre}</h1>
+                <span>Stock disponible: ${(productos?.stock ?? "No hay stock disponibles") }</span>
+                <p> Precio: $${productos.precio}</p>
+            </div>
+            `
+        })
 })
 
-right.addEventListener("click", () => {
-    box.style.right = `${derechacont}px`
-    derechacont = derechacont - 50;
-})
+btnborrar.addEventListener("click", () => {
+    producto1.stock = null;
+    producto2.stock = null;
+    producto3.stock = null;
+    producto4.stock = null;
+    contdiv.innerHTML = ``
 
-down.addEventListener("click", () => {
-    box.style.bottom = `${abajocont}px`
-    abajocont = abajocont - 50;
-})
-
-reset.addEventListener("click", () => {
-    box.style.top = "0px";
-    box.style.right = "0px";
-    box.style.left = "0px";
-    box.style.bottom = "0px";
-
-    arribacont = -50;
-    derechacont = -50;
-    izquierdacont = -50;
-    abajocont = -50;
-
+    productos.forEach(productos => {
+            contdiv.innerHTML += `
+            <div class="cardinfo">
+                <h1>${productos.nombre}</h1>
+                <span>Stock disponible: ${(productos?.stock ?? "No hay stock disponibles") }</span>
+                <p> Precio: $${productos.precio}</p>
+            </div>
+            `
+        })
 })
